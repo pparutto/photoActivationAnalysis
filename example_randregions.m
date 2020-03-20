@@ -11,12 +11,12 @@
 % Modify these parameters for your own file organization
 
 % the directory where images are stored
-dirname = '~/UCSD/data/Avezov/photoactivated_spreading/Edward013020/';
+dirname = '/mnt/data/photoactivation_data/data/1_SH-SY5Y_ER_PA_GFP_RTN4_KO/1_WT/190226_SH-SY5Y_PA_GFP_Rtn4_KO_WT_ROI1/';
 
 % the name of the tif file containing images before photoactivation
-prefile = 'C3-190508_COS7_ATP_depleted_Series12_FRAP4_pre.tif';
+prefile = 'C3-FRAP001_pre.tif';
 % the name of the tif file containing images during photoactivation
-PAfile = 'C3-190508_COS7_ATP_depleted_Series12_FRAP4_bleach.tif';
+PAfile = 'C3-FRAP001_bleach.tif';
 
 % now load the images 
 % rawimgs has the raw images (replace with ~ to save memory by not keeping
@@ -35,9 +35,10 @@ implay(imgs)
 % click and drag to select the photoactivated region
 % you can resize or draw the circle afterward as needed
 figure(1)
-imshow(imgs(:,:,startPA+5),[0,0.5]);
+tmp = imgs(:,:,startPA+5);
+imshow(tmp, [0 max(tmp(:))]);
 
-actROI = drawcircle(gca,'Color','y')
+actROI = drawcircle(gca,'Color','y');
 actcent = actROI.Center;
 actrad = actROI.Radius;
 
@@ -48,7 +49,8 @@ actrad = actROI.Radius;
 % you can also adjust the photoactivated region ROI if desired
 % (keep in mind this image is the end of the photoactivated period).
 figure(1)
-imshow(imgs(:,:,end));
+tmp = imgs(:,:,end);
+imshow(tmp, [0 max(tmp(:))]);
 cellROI = drawpolygon(gca);
 celloutline = cellROI.Position;
 
